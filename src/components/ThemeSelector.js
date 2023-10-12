@@ -7,7 +7,7 @@ const themeColors = ["#58249c" , "#249c6b" , "#b70233"];
 export default function ThemeSelector() {
     const {changeColor , changeMode , mode} = useTheme();
     
-        const toggleMode = () => {
+    const toggleMode = () => {
         changeMode(mode === "dark" ? "light" : "dark")
     }
 

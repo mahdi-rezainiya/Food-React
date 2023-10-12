@@ -9,7 +9,6 @@ import ThemeSelector from './components/ThemeSelector';
 import { useTheme } from './hooks/useTheme';
 
 function App() {
-  // new
   const {mode} = useTheme()
 
   return (
