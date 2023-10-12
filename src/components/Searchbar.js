@@ -10,10 +10,11 @@ export default function Searchbar() {
         e.preventDefault();
         navigate(`/search?q=${term}`);
     }
+    
     return (
     <div className='searchbar'>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="search">Search :</label>
+            <label htmlFor="search">Search:</label>
             <input id='search' type="text" onChange={(e) => setTerm(e.target.value)} required />
         </form>
     </div>

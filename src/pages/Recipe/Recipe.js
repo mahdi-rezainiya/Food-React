@@ -4,14 +4,15 @@ import { useFetch } from '../../hooks/useFetch';
 import { useTheme } from '../../hooks/useTheme';
 
 export default function Recipe() {
-    const {id} = useParams();
+    const {id} = useParams() ;
     const url = 'http://localhost:3000/recipes/' + id ;
-    const {data:recipe , isLoading , error} = useFetch(url);
-    const {mode} = useTheme();
+    const {data:recipe , isLoading , error} = useFetch(url) ;
+    const {mode} = useTheme() ;
+
     return (
         <div className={`recipe ${mode}`}>
             {error && <p className='error'>{error}</p>}
-            {isLoading && <p className='loading'>Loading . . .</p>}
+            {isLoading && <p className='loading'>Loading . . . </p>}
             {recipe && (
                 <>
                     <h2 className='page-title'>{recipe.title}</h2>

@@ -1,33 +1,26 @@
-import { useNavigate } from 'react-router-dom'
-import { useFetch } from '../../hooks/useFetch';
 import './Create.css';
+import { useNavigate } from 'react-router-dom';
+import { useFetch } from '../../hooks/useFetch.js';
 import {useEffect, useState} from 'react';
-export default function Create() {
-    const [title , setTitle] = useState('');
-    const [method , setMethod] = useState('');
-    const [cookingTime , setCookingTime] = useState('');
-    const [newIngredient , setNewIngredient] = useState('');
-    const [ingredients , setIngredients] = useState([]);
 
-    // Post Data
-    const url = 'http://localhost:3000/recipes';
-    const {postData , data, error} = useFetch(url , 'POST');
-    const navigate = useNavigate();
+export default function Create() {
+    const [title , setTitle] = useState('') ;
+    const [method , setMethod] = useState('') ;
+    const [cookingTime , setCookingTime] = useState('') ;
+    const [newIngredient , setNewIngredient] = useState('') ;
+    const [ingredients , setIngredients] = useState([]) ;
+
+    const url = 'http://localhost:3000/recipes' ;
+    const {postData , data, error} = useFetch(url , 'POST') ;
+    const navigate = useNavigate() ;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(title , method , cookingTime , ingredients);
         postData({title , ingredients , method , cookingTime : cookingTime + ' minutes'})
-        // setTitle('')
-        // setIngredients([])
-        // setMethod('')
-        // setCookingTime('')
-        // setTimeout(() => {navigate('/')} , 2000)
     }
 
     const handleAdd = (e) => {
         e.preventDefault()
-
         if(newIngredient && !ingredients.includes(newIngredient)){
             setIngredients(prevIngredients => [...prevIngredients , newIngredient])
         }
