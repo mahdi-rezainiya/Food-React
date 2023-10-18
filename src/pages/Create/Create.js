@@ -1,7 +1,10 @@
 import './Create.css';
 import { useNavigate } from 'react-router-dom';
-import { useFetch } from '../../hooks/useFetch.js';
-import {useEffect, useState} from 'react';
+// import { useFetch } from '../../hooks/useFetch.js';
+// import {useEffect, useState} from 'react';
+import {useState} from 'react';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 
 export default function Create() {
     const [title , setTitle] = useState('') ;
@@ -10,13 +13,24 @@ export default function Create() {
     const [newIngredient , setNewIngredient] = useState('') ;
     const [ingredients , setIngredients] = useState([]) ;
 
-    const url = 'http://localhost:3000/recipes' ;
-    const {postData , data, error} = useFetch(url , 'POST') ;
+    // const url = 'http://localhost:3000/recipes' ;
+    // const {postData , data, error} = useFetch(url , 'POST') ;
     const navigate = useNavigate() ;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        postData({title , ingredients , method , cookingTime : cookingTime + ' minutes'})
+        // postData({title , ingredients , method , cookingTime : cookingTime + ' minutes'})
+        const doc = {title , ingredients , method , cookingTime : cookingTime + ' minutes'}
+
+        try{
+            const ref = collection(db , 'recipes')
+            await addDoc(ref , doc)
+            navigate('/')
+        }
+        catch(err){
+            console.log(err);
+        }
+        
     }
 
     const handleAdd = (e) => {
@@ -27,15 +41,15 @@ export default function Create() {
         setNewIngredient('')
     }
 
-    useEffect(() => {
-        if(data){
-            navigate('/')
-        }
-    } , [data , navigate])
+    // useEffect(() => {
+    //     if(data){
+    //         navigate('/')
+    //     }
+    // } , [data , navigate])
 
     return (
         <div className="create">
-            {error && <p>{error}</p>}
+            {/* {error && <p>{error}</p>} */}
             <h2 className='page-title'>Add a New Recipe</h2>
             <form onSubmit={handleSubmit}>
                 <label>
