@@ -26,6 +26,17 @@
 .method {
     text-align: left;
     line-height: 1.5em;
+    display: flex;
+    justify-content: center;
+    }
+    .btn-up{
+        padding: 20px;
+        color: white;
+        background-color: #1d1d1d;
+        border: 0;
+        border-radius: 5px;
+        font-size: 20px;
+        margin-top: 10px;
     }
 /* dark mode */
 .recipe.dark{
