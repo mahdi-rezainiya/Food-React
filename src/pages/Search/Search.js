@@ -1,10 +1,11 @@
-import { useLocation } from 'react-router-dom';
 import './Search.css';
+import { useLocation } from 'react-router-dom';
 import { useFetch } from '../../hooks/useFetch';
 import RecipeList from '../../components/RecipeList';
 import { useTheme } from '../../hooks/useTheme.js';
 
 export default function Search() {
+
     const {mode} = useTheme();
 
     const queryString = useLocation().search;

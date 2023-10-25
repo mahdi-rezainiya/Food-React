@@ -38,9 +38,11 @@ export const useFetch = (url , method = 'GET') => {
         if(method === 'GET'){
             fetchData()
         }
+
         if(method === 'POST' && options){
             fetchData(options)
         }
+        
     }, [url , method , options])
 
     return {data, isLoading, error , postData}

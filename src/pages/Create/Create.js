@@ -1,25 +1,21 @@
 import './Create.css';
 import { useNavigate } from 'react-router-dom';
-// import { useFetch } from '../../hooks/useFetch.js';
-// import {useEffect, useState} from 'react';
 import {useState} from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 
 export default function Create() {
+
     const [title , setTitle] = useState('') ;
     const [method , setMethod] = useState('') ;
     const [cookingTime , setCookingTime] = useState('') ;
     const [newIngredient , setNewIngredient] = useState('') ;
     const [ingredients , setIngredients] = useState([]) ;
 
-    // const url = 'http://localhost:3000/recipes' ;
-    // const {postData , data, error} = useFetch(url , 'POST') ;
     const navigate = useNavigate() ;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // postData({title , ingredients , method , cookingTime : cookingTime + ' minutes'})
         const doc = {title , ingredients , method , cookingTime : cookingTime + ' minutes'}
 
         try{
@@ -34,24 +30,22 @@ export default function Create() {
     }
 
     const handleAdd = (e) => {
+
         e.preventDefault()
         if(newIngredient && !ingredients.includes(newIngredient)){
             setIngredients(prevIngredients => [...prevIngredients , newIngredient])
         }
+        
         setNewIngredient('')
     }
 
-    // useEffect(() => {
-    //     if(data){
-    //         navigate('/')
-    //     }
-    // } , [data , navigate])
-
     return (
         <div className="create">
-            {/* {error && <p>{error}</p>} */}
+
             <h2 className='page-title'>Add a New Recipe</h2>
+            
             <form onSubmit={handleSubmit}>
+
                 <label>
                     <span>Recipe Title :</span>
                     <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} required />
@@ -78,6 +72,7 @@ export default function Create() {
                 </label>
 
                 <button className="btn">Submit</button>
+                
             </form>
         </div>
     )
